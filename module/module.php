@@ -4,8 +4,8 @@
   // connecto database
   
   $title = "Index";
-  require_once "./template/header.php";
-  require_once "./functions/database_functions.php";
+  require_once "template/header.php";
+  require_once "functions/database_functions.php";
   $conn = db_connect();
   $row = select4LatestBook($conn);
 ?>

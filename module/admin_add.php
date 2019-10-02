@@ -24,6 +24,9 @@
 		
 		$publisher = trim($_POST['publisher']);
 		$publisher = mysqli_real_escape_string($conn, $publisher);
+		
+	    $link = trim($_POST['link']);
+		$link = mysqli_real_escape_string($conn, $link);
 
 		// add image
 		if(isset($_FILES['image']) && $_FILES['image']['name'] != ""){
@@ -53,7 +56,7 @@
 		}
 
 
-		$query = "INSERT INTO books VALUES ('" . $isbn . "', '" . $title . "', '" . $author . "', '" . $image . "', '" . $descr . "', '" . $price . "', '" . $publisherid . "')";
+		$query = "INSERT INTO books VALUES ('" . $isbn . "', '" . $title . "', '" . $author . "', '" . $image . "', '" . $descr . "', '" . $price . "', '" . $publisherid . "','" . $link . "')";
 		$result = mysqli_query($conn, $query);
 		if(!$result){
 			echo "Can't add new data " . mysqli_error($conn);
@@ -92,6 +95,10 @@
 			<tr>
 				<th>Publisher</th>
 				<td><input type="text" name="publisher" required></td>
+			</tr>
+		    	<tr>
+				<th>Add Link</th>
+				<td><input type="text" name="link" required></td>
 			</tr>
 		</table>
 		<input type="submit" name="add" value="Add new book" class="btn btn-primary">

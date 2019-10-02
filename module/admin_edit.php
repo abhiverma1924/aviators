@@ -57,6 +57,10 @@
 				<th>Publisher</th>
 				<td><input type="text" name="publisher" value="<?php echo getPubName($conn, $row['publisherid']); ?>" required></td>
 			</tr>
+			<tr>
+				<th>Add Link</th>
+				<td><input type="text" name="link"  value="<?php echo $row['link'];?>"></td>
+			</tr>
 		</table>
 		<input type="submit" name="save_change" value="Change" class="btn btn-primary">
 		<input type="reset" value="cancel" class="btn btn-default">
