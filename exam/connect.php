@@ -117,7 +117,7 @@ var b = document.forms["form"]["cpassword"].value;if (a!=b){alert("Passwords mus
 
                       <div class="form-label-group">
                         <label for="inputPassword">Password</label>
-                        <input type="password" name="pass" id="inputPassword" class="form-control" placeholder="Password" value="<?php echo $pass; ?>" required>
+                        <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" value="<?php echo $pass; ?>" required>
                       </div>
                       <div class="options text-center text-md-right mt-1">
                         <p style="color: blue;">Not a member? <a href="#panel2" data-toggle="tab" role="tab" style="color: rgb(171, 194, 219);">Sign Up</a></p>
