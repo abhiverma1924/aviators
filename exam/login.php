@@ -22,7 +22,7 @@ $password = addslashes($password);
 
 $logObj->email = $email;
 $logObj->pass = $password;
-$cache = 'sample.cache.php';
+$cache = './cache/sample.cache.php';
 
 $password=md5($password);
 $result = mysqli_query($con,"SELECT name FROM user WHERE email = '$email' and password = '$password'") or die('Error');
@@ -36,10 +36,10 @@ while($row = mysqli_fetch_array($result)) {
     $objData = serialize($logObj);
     fwrite($f, $objData);
     fclose($f);
-    echo"cache Written";
   }
   else {
-    echo "not ticked";
+    $f = fopen($cache, 'w+');
+		fclose($f);
   }
 }
 $_SESSION["name"] = $name;

@@ -30,7 +30,7 @@ var b = document.forms["form"]["cpassword"].value;if (a!=b){alert("Passwords mus
     <div class="bg-image">
     </div>
     <?php
-    $cache = 'sample.cache.php';
+    $cache = './cache/sample.cache.php';
     if (file_exists($cache)) {
       class loginInfo {
       }
@@ -56,7 +56,7 @@ var b = document.forms["form"]["cpassword"].value;if (a!=b){alert("Passwords mus
       .bg-image {
         position: absolute;
         /* The image used */
-        background-image: url("./images/background.jpg");
+        background-image: url("../images/background.jpg");
 
         /* Add the blur effect */
         filter: blur(8px);
@@ -77,19 +77,11 @@ var b = document.forms["form"]["cpassword"].value;if (a!=b){alert("Passwords mus
           <a href="../index.html"><h1>AVIATOR</h1></a>
         </div>
       </div>
-      <style>
-      #back:hover {
-        transform: translateX(20px);
-      }
-      </style>
       <div class="container">
         <div class="row">
-            <a href="../index.html">
-              <div class="col-md-8 d-none d-md-block" style= " border-radius: 60px;  text-align: center; height: 80vh; background-color: grey; transition: 1s" id="back">
-                <h1 style=" padding-top: 20vh ">GET BACK</h1>
-                <h1 style=" font-size: 10em " >&#8678;</h1>
+              <div class="col-md-8 d-none d-md-block" style= " border-radius: 60px; height: 100px; width: 100px">
+                <img src="../images/imageLogin.jpg">
               </div>
-            </a>
           <div class="col-sm-8 col-md-4 mx-auto ">
             <div class="card card-signin my-5">
               <div class="card-header" style=" font-size: 1.5em; background-color: black">
