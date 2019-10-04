@@ -6,17 +6,13 @@
 <title>AVIATION AND COMMUNICATION </title>
 <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-   <link  rel="stylesheet" href="css/bootstrap.min.css"/>
-   <link  rel="stylesheet" href="css/bootstrap-theme.min.css"/>    
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="./css/font-awesome/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="./css/bootstrap-social/bootstrap-social.css" />
+  <link rel="stylesheet" href="./css/font-awesome/css/font-awesome.min.css" />
+   <link  rel="stylesheet" href="css/bootstrap-theme.min.css"/>
    <link rel="stylesheet" href="css/main.css">
    <link  rel="stylesheet" href="css/font.css">
-   <script src="js/jquery.js" type="text/javascript"></script>
-
-  <script src="js/bootstrap.min.js"  type="text/javascript"></script>
  	<link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
 <?php if(@$_GET['w'])
 {echo'<script>alert("'.@$_GET['w'].'");</script>';}
@@ -31,224 +27,238 @@ var b = document.forms["form"]["cpassword"].value;if (a!=b){alert("Passwords mus
 </head>
 
 <body>
-<div class="header" >
-  <div class="gradDynamic"></div>
-<div class="row">
-<div class="col-lg-6">
-<span class="logo"><a href="../index.html" style="color: orange;">  AVIATOR'S VISION  </a></span></div>
-<div class="col-md-2 col-md-offset-4">
-<a href="#" class="pull-right btn sub1" data-toggle="modal" data-target="#myModal" style="padding: 3px; color:black;"><b>Sign In </b></a></div>
-<!--sign in modal start-->
-<div class="modal fade" id="myModal">
-  <div class="modal-dialog">
-    <div class="modal-content title1">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title title1"><span style="color:blue;">Log In</span></h4>
+    <div class="bg-image">
+    </div>
+    <?php
+    $cache = 'sample.cache.php';
+    if (file_exists($cache)) {
+      class loginInfo {
+      }
+      $objData = file_get_contents($cache);
+      $obj = unserialize($objData);
+      if (!empty($obj)) {
+          $email = $obj->email;
+          $pass = $obj->pass;
+      }
+    }
+    else {
+      $email="";
+      $pass="";
+    }
+     ?>
+    <div class="main">
+      <style>
+      body, html {
+        height: 100%;
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      .bg-image {
+        position: absolute;
+        /* The image used */
+        background-image: url("./images/background.jpg");
+
+        /* Add the blur effect */
+        filter: blur(8px);
+        -webkit-filter: blur(8px);
+
+        height: 100%;
+        width: 100%;
+
+        /* Center and scale the image nicely */
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+
+      }
+      </style>
+      <div class="navbar" style=" background-color: black ">
+        <div class="nav-brand" style=" color: red">
+          <a href="../index.html"><h1>AVIATOR</h1></a>
+        </div>
       </div>
-      <div class="modal-body">
-        <form class="form-horizontal" action="login.php?q=connect.php" method="POST">
-<fieldset>
+      <style>
+      #back:hover {
+        transform: translateX(20px);
+      }
+      </style>
+      <div class="container">
+        <div class="row">
+            <a href="../index.html">
+              <div class="col-md-8 d-none d-md-block" style= " border-radius: 60px;  text-align: center; height: 80vh; background-color: grey; transition: 1s" id="back">
+                <h1 style=" padding-top: 20vh ">GET BACK</h1>
+                <h1 style=" font-size: 10em " >&#8678;</h1>
+              </div>
+            </a>
+          <div class="col-sm-8 col-md-4 mx-auto ">
+            <div class="card card-signin my-5">
+              <div class="card-header" style=" font-size: 1.5em; background-color: black">
+                <ul class="nav nav-tabs md-tabs tabs-2 light-blue darken-3" role="tablist">
+                  <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#panel1" role="tab" ><i class="fa fa-user mr-1 fa-lg"></i>
+                      Login
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#panel2" role="tab" ><i class="fa fa-user-plus mr-1 fa-lg"></i>
+                      Register
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <div class="card-body" style= " font-size: 1.4em">
+                <div class="tab-content">
+                  <div class="tab-pane fade show active" id="panel1" role="tabpanel">
+                    <form class="form-signin" action="login.php?q=connect.php" method="post">
+                      <div class="form-label-group">
+                        <label for="inputEmail">Email address</label>
+                        <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" value="<?php echo $email; ?>" required autofocus>
+                      </div>
 
+                      <div class="form-label-group">
+                        <label for="inputPassword">Password</label>
+                        <input type="password" name="pass" id="inputPassword" class="form-control" placeholder="Password" value="<?php echo $pass; ?>" required>
+                      </div>
+                      <div class="options text-center text-md-right mt-1">
+                        <p style="color: blue;">Not a member? <a href="#panel2" data-toggle="tab" role="tab" style="color: rgb(171, 194, 219);">Sign Up</a></p>
+                        <p style="color: blue;">Forgot <a href="#" style="color:rgb(169, 190, 214);">Password?</a></p>
+                      </div>
 
-<!-- Text input-->
-<div class="form-back">
-<div class="form-group">
-  <label class="col-md-3 control-label" for="email"></label>  
-  <div class="col-md-6">
-  <input id="email" name="email" placeholder="Enter your email-id" class="form-control input-md" type="email">
-    
-  </div>
-</div>
+                      <div class="custom-control custom-checkbox mb-3">
+                        <input type="checkbox" class="custom-control-input" id="customCheck1" name="chkMe" value="PassSave">
+                        <label class="custom-control-label" for="customCheck1">Remember password</label>
+                      </div>
+                      <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit" >Sign in</button>
+                      <hr class="my-4">
+                    </form>
+                  </div>
+                  <div class="tab-pane fade" id="panel2" role="tabpanel">
+                    <form class="form-signin" action="signup.php" method="post">
+                      <div class="form-label-group">
+                        <label for="inputName">Your Name</label>
+                        <input type="text" id="inputName" name="name" class="form-control" placeholder="Username" required autofocus>
+                      </div>
 
+                      <div class="form-label-group">
+                        <label for="inputGender">Gender</label>
+                        <select id="inputGender" name="gender" class="form-control">
+                          <option value="Male">Male</option>
+                          <option value="Female">Female</option>
+                        </select>
+                      </div>
 
-<!-- Password input-->
-<div class="form-group">
-  <label class="col-md-3 control-label" for="password"></label>
-  <div class="col-md-6">
-    <input id="password" name="password" placeholder="Enter your Password" class="form-control input-md" type="password">
-    
-  </div>
-</div>
+                      <div class="form-label-group">
+                        <label for="inputCollege">Enter your College name</label>
+                        <input type="text" id="inputCollege" name="college" class="form-control" placeholder="College Name" required autofocus>
+                      </div>
 
+                      <div class="form-label-group">
+                        <label for="inputEmail">Email address</label>
+                        <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+                      </div>
+
+                      <div class="form-label-group">
+                        <label for="inputNumber">Phone Number</label>
+                        <input type="text" name="phone" id="inputNumber" class="form-control" placeholder="Eneter your phone number here" required autofocus>
+                      </div>
+
+                      <div class="form-label-group">
+                        <label for="inputPass">Make a Password</label>
+                        <input type="password" name="password" id="inputPass" class="form-control" placeholder="Make a password" required autofocus>
+                      </div>
+
+                      <div class="form-label-group">
+                        <label for="inputPassword">Confirm pass</label>
+                        <input type="password" name="cpassword" id="inputConfirm" class="form-control" placeholder="Confirm your password" required>
+                      </div>
+                      <?php if(@$_GET['q7'])
+                      { echo'<p style="color:red;font-size:15px;">'.@$_GET['q7'];}
+                      ?>
+                      <div class="options text-center text-md-right mt-1">
+                        <p style="color: blue;">Already Member? <a data-toggle="tab" href="#panel1" role="tab" style="color: rgb(171, 194, 219);">Sign Up</a></p>
+                      </div>
+                      <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign Up</button>
+                      <hr class="my-4">
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Log in</button>
-		</fieldset>
-</form>
+      <!--Footer start-->
+      <div class="row footer">
+      <div class="col-md-4 box">
+      <a href="#" data-toggle="modal" data-target="#login">Admin Login</a></div>
+      <div class="col-md-4 box">
+      <a href="#" data-toggle="modal" data-target="#developers">Developer</a>
       </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-<!--sign in modal closed-->
+      <div class="col-md-4 box">
+      <a href="feedback.php" target="_blank">Feedback</a></div></div>
+      <!-- Modal For Developers-->
+      <div class="modal fade title1" id="developers">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+              <h4 class="modal-title" style="font-family:'typo' "><span style="color:orange">Developer</span></h4>
+            </div>
 
-</div><!--header row closed-->
-</div>
+            <div class="modal-body">
+              <p>
+      		<div class="row">
+      		<div class="col-md-4">
+      		 <img src="#" width=100 height=100 alt="ABHINAV VERMA" class="img-rounded">
+      		 </div>
+      		 <div class="col-md-5">
+      		<a href="http://yugeshverma.blogspot.in" style="color:#202020; font-family:'typo' ; font-size:18px" title="Find on Facebook">Abhinav Verma</a>
+      		<h4 style="color:#202020; font-family:'typo' ;font-size:16px" class="title1">+91 8791189792</h4>
+      		<h4 style="font-family:'typo' ">abhiverma1819@gmail.com</h4>
+      		<h4 style="font-family:'typo' ">jaypee institute of information and Technology , Noida</h4></div></div>
+      		</p>
+            </div>
 
-<div class="bg1" >
-<div class="row">
-<div class="col-md-4">
-</div>
-<div class="col-md-4 panel">
-<!-- sign in form begins -->  
-  <form class="form-horizontal" name="form" action="sign.php?q=account.php" onSubmit="return validateForm()" method="POST">
-<fieldset>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->
 
-
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-12 control-label" for="name"></label>  
-  <div class="col-md-12">
-  <input id="name" name="name" placeholder="Enter your name" class="form-control input-md" type="text">
-    
-  </div>
-</div>
-
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-12 control-label" for="gender"></label>
-  <div class="col-md-12">
-    <select id="gender" name="gender" placeholder="Enter your gender" class="form-control input-md" >
-   <option value="Male">Select Gender</option>
-  <option value="M">Male</option>
-  <option value="F">Female</option> </select>
-  </div>
-</div>
-
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-12 control-label" for="name"></label>  
-  <div class="col-md-12">
-  <input id="college" name="college" placeholder="Enter your college name" class="form-control input-md" type="text">
-    
-  </div>
-</div>
-
-
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-12 control-label title1" for="email"></label>
-  <div class="col-md-12">
-    <input id="email" name="email" placeholder="Enter your email-id" class="form-control input-md" type="email">
-    
-  </div>
-</div>
-
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-12 control-label" for="mob"></label>  
-  <div class="col-md-12">
-  <input id="mob" name="mob" placeholder="Enter your mobile number" class="form-control input-md" type="number">
-    
-  </div>
-</div>
-
-
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-12 control-label" for="password"></label>
-  <div class="col-md-12">
-    <input id="password" name="password" placeholder="Enter your password" class="form-control input-md" type="password">
-    
-  </div>
-</div>
-
-<div class="form-group">
-  <label class="col-md-12control-label" for="cpassword"></label>
-  <div class="col-md-12">
-    <input id="cpassword" name="cpassword" placeholder="Conform Password" class="form-control input-md" type="password">
-    
-  </div>
-</div>
-<?php if(@$_GET['q7'])
-{ echo'<p style="color:red;font-size:15px;">'.@$_GET['q7'];}?>
-<!-- Button -->
-<div class="form-group">
-  <label class="col-md-12 control-label" for=""></label>
-  <div class="col-md-12"> 
-    <input  type="submit" class="sub" value="sign up"  />
-  </div>
-</div>
-</div>
-
-</fieldset>
-</form>
-</div>
-<!--col-md-6 end-->
-</div>
-</div>
-</div><!--container end-->
-
-<!--Footer start-->
-<div class="row footer">
-<div class="col-md-4 box">
-<a href="#" data-toggle="modal" data-target="#login">Admin Login</a></div>
-<div class="col-md-4 box">
-<a href="#" data-toggle="modal" data-target="#developers">Developer</a>
-</div>
-<div class="col-md-4 box">
-<a href="feedback.php" target="_blank">Feedback</a></div></div>
-<!-- Modal For Developers-->
-<div class="modal fade title1" id="developers">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title" style="font-family:'typo' "><span style="color:orange">Developer</span></h4>
+      <!--Modal for admin login-->
+      	 <div class="modal fade" id="login">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+              <h4 class="modal-title"><span style="color:orange;font-family:'typo' ">LOGIN</span></h4>
+            </div>
+            <div class="modal-body title1">
+      <div class="row">
+      <div class="col-md-3"></div>
+      <div class="col-md-6">
+      <form role="form" method="post" action="admin.php?q=connect.php">
+      <div class="form-group">
+      <input type="text" name="uname" maxlength="20"  placeholder="Admin user id" class="form-control"/>
       </div>
-	  
-      <div class="modal-body">
-        <p>
-		<div class="row">
-		<div class="col-md-4">
-		 <img src="#" width=100 height=100 alt="ABHINAV VERMA" class="img-rounded">
-		 </div>
-		 <div class="col-md-5">
-		<a href="http://yugeshverma.blogspot.in" style="color:#202020; font-family:'typo' ; font-size:18px" title="Find on Facebook">Abhinav Verma</a>
-		<h4 style="color:#202020; font-family:'typo' ;font-size:16px" class="title1">+91 8791189792</h4>
-		<h4 style="font-family:'typo' ">abhiverma1819@gmail.com</h4>
-		<h4 style="font-family:'typo' ">jaypee institute of information and Technology , Noida</h4></div></div>
-		</p>
+      <div class="form-group">
+      <input type="password" name="password" maxlength="15" placeholder="Password" class="form-control"/>
       </div>
-    
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-
-<!--Modal for admin login-->
-	 <div class="modal fade" id="login">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title"><span style="color:orange;font-family:'typo' ">LOGIN</span></h4>
+      <div class="form-group" align="center">
+      <input type="submit" name="login" value="Login" class="btn btn-primary" />
       </div>
-      <div class="modal-body title1">
-<div class="row">
-<div class="col-md-3"></div>
-<div class="col-md-6">
-<form role="form" method="post" action="admin.php?q=connect.php">
-<div class="form-group">
-<input type="text" name="uname" maxlength="20"  placeholder="Admin user id" class="form-control"/> 
-</div>
-<div class="form-group">
-<input type="password" name="password" maxlength="15" placeholder="Password" class="form-control"/>
-</div>
-<div class="form-group" align="center">
-<input type="submit" name="login" value="Login" class="btn btn-primary" />
-</div>
-</form>
-</div><div class="col-md-3"></div></div>
-      </div>
-      <!--<div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>-->
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-<!--footer end-->
+      </form>
+      </div><div class="col-md-3"></div></div>
+            </div>
+            <!--<div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>-->
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->
+      <!--footer end-->
+    </div>
 
-
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 </html>
