@@ -109,7 +109,7 @@ var b = document.forms["form"]["cpassword"].value;if (a!=b){alert("Passwords mus
               <div class="card-body" style= " font-size: 1.4em">
                 <div class="tab-content">
                   <div class="tab-pane fade show active" id="panel1" role="tabpanel">
-                    <form class="form-signin" action="login.php?q=connect.php" method="post">
+                    <form class="form-signin" action="login.php?q=connect.php" method="POST">
                       <div class="form-label-group">
                         <label for="inputEmail">Email address</label>
                         <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" value="<?php echo $email; ?>" required autofocus>
@@ -133,7 +133,7 @@ var b = document.forms["form"]["cpassword"].value;if (a!=b){alert("Passwords mus
                     </form>
                   </div>
                   <div class="tab-pane fade" id="panel2" role="tabpanel">
-                    <form class="form-signin" action="signup.php" method="post">
+                    <form class="form-signin" name="form" action="sign.php?q=account.php" onSubmit="return validateForm()" method="POST">
                       <div class="form-label-group">
                         <label for="inputName">Your Name</label>
                         <input type="text" id="inputName" name="name" class="form-control" placeholder="Username" required autofocus>
@@ -159,7 +159,7 @@ var b = document.forms["form"]["cpassword"].value;if (a!=b){alert("Passwords mus
 
                       <div class="form-label-group">
                         <label for="inputNumber">Phone Number</label>
-                        <input type="text" name="phone" id="inputNumber" class="form-control" placeholder="Eneter your phone number here" required autofocus>
+                        <input type="text" name="mob" id="inputNumber" class="form-control" placeholder="Eneter your phone number here" required autofocus>
                       </div>
 
                       <div class="form-label-group">
