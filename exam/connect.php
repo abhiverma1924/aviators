@@ -79,8 +79,13 @@ var b = document.forms["form"]["cpassword"].value;if (a!=b){alert("Passwords mus
       </div>
       <div class="container">
         <div class="row">
-              <div class="col-md-8 d-none d-md-block" style= " border-radius: 60px; height: 100px; width: 100px">
-                <img src="../images/imageLogin.jpg">
+          <style>
+            #imageDiv img {
+              padding: 10% 10% 10% 10%;
+            }
+          </style>
+              <div id="imageDiv" class="col-md-8 d-none d-md-block" style= " border-radius: 60px; height: 100vh; width: 100vh ">
+                <img src="../images/imageLogin.jpg" width="90%" height="90%" align="middle" >
               </div>
           <div class="col-sm-8 col-md-4 mx-auto ">
             <div class="card card-signin my-5">
