@@ -30,20 +30,20 @@ var b = document.forms["form"]["cpassword"].value;if (a!=b){alert("Passwords mus
     <div class="bg-image">
     </div>
     <?php
-    $cache = './cache/sample.cache.php';
-    if (file_exists($cache)) {
+
+    if(isset($_COOKIE["user"])) {
       class loginInfo {
       }
-      $objData = file_get_contents($cache);
+      $objData = $_COOKIE['user'];
       $obj = unserialize($objData);
       if (!empty($obj)) {
           $email = $obj->email;
           $pass = $obj->pass;
       }
-    }
-    else {
-      $email="";
-      $pass="";
+      else {
+        $email="";
+        $pass="";
+      }
     }
      ?>
     <div class="main">

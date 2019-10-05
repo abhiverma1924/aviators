@@ -30,16 +30,11 @@ $count=mysqli_num_rows($result);
 if($count==1){
 while($row = mysqli_fetch_array($result)) {
 	$name = $row['name'];
-	echo "COrrect Pass Login Granted<br>";
   if (isset($_POST['chkMe'])) {
-    $f = fopen($cache, 'w+') or die("error writing file");
     $objData = serialize($logObj);
-    fwrite($f, $objData);
-    fclose($f);
-  }
-  else {
-    $f = fopen($cache, 'w+');
-		fclose($f);
+    $cookie_name = "user";
+    $cookie_value = $objData;
+    setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/"); //the value stored for 30 days
   }
 }
 $_SESSION["name"] = $name;
