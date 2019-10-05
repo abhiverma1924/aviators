@@ -45,6 +45,10 @@ var b = document.forms["form"]["cpassword"].value;if (a!=b){alert("Passwords mus
         $pass="";
       }
     }
+    else {
+      $email="";
+      $pass="";
+    }
      ?>
     <div class="main">
       <style>
