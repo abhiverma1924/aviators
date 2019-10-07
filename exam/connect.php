@@ -81,22 +81,22 @@ var b = document.forms["form"]["cpassword"].value;if (a!=b){alert("Passwords mus
           <a href="../index.html"><h1>AVIATOR</h1></a>
         </div>
       </div>
+      <style>
+        #imageDiv img {
+          padding: 0% 0% 0% 0%;
+          width: 90vh;
+          height: 90vh;
+        }
+        .carousel-indicators > li {
+          border-radius: 100%;
+          height: 2vh;
+          width: 2vh;
+        }
+      </style>
       <div class="container">
-        <div class="row">
-          <style>
-            #imageDiv img {
-              padding: 0% 0% 0% 0%;
-              width: 100%;
-              height: 90vh;
-            }
-            .carousel-indicators > li {
-              border-radius: 100%;
-              height: 2vh;
-              width: 2vh;
-            }
-          </style>
-              <div id="imageDiv" class="col-md-8 d-none d-md-block" style= "border-radius: 60px;">
-                <div id="carousel-login" class="carousel slide" data-ride="carousel" style="width:80vh">
+          <div class="row">
+              <div id="imageDiv" class="col-md-5 d-none d-md-block" style= "border-radius: 60px;">
+                <div id="carousel-login" class="carousel slide" data-ride="carousel" style="width:100%">
                   <!--Indicators-->
                   <ol class="carousel-indicators">
                     <li data-target="#carousel-login" data-slide-to="0" class="active"></li>
@@ -120,103 +120,103 @@ var b = document.forms["form"]["cpassword"].value;if (a!=b){alert("Passwords mus
                   </div>
                 </div>
               </div>
-          <div class="col-sm-8 col-md-4 mx-auto ">
-            <div class="card card-signin my-5">
-              <div class="card-header" style=" font-size: 1.5em; background-color: black">
-                <ul class="nav nav-tabs md-tabs tabs-2 light-blue darken-3" role="tablist">
-                  <li class="nav-item">
-                    <a class="nav-link active" data-toggle="tab" href="#panel1" role="tab" ><i class="fa fa-user mr-1 fa-lg"></i>
-                      Login
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#panel2" role="tab" ><i class="fa fa-user-plus mr-1 fa-lg"></i>
-                      Register
-                    </a>
-                  </li>
-                </ul>
-              </div>
-              <div class="card-body" style= " font-size: 1.4em">
-                <div class="tab-content">
-                  <div class="tab-pane fade show active" id="panel1" role="tabpanel">
-                    <form class="form-signin" action="login.php?q=connect.php" method="POST">
-                      <div class="form-label-group">
-                        <label for="inputEmail">Email address</label>
-                        <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" value="<?php echo $email; ?>" required autofocus>
-                      </div>
-
-                      <div class="form-label-group">
-                        <label for="inputPassword">Password</label>
-                        <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" value="<?php echo $pass; ?>" required>
-                      </div>
-                      <div class="options text-center text-md-right mt-1">
-                        <p style="color: blue;">Not a member? <a href="#panel2" data-toggle="tab" role="tab" style="color: rgb(171, 194, 219);">Sign Up</a></p>
-                        <p style="color: blue;">Forgot <a href="#" style="color:rgb(169, 190, 214);">Password?</a></p>
-                      </div>
-
-                      <div class="custom-control custom-checkbox mb-3">
-                        <input type="checkbox" class="custom-control-input" id="customCheck1" name="chkMe" value="PassSave">
-                        <label class="custom-control-label" for="customCheck1">Remember password</label>
-                      </div>
-                      <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit" >Sign in</button>
-                      <hr class="my-4">
-                    </form>
+              <div class="col-md-7 mx-auto" style="height:100vh">
+                <div class="card card-signin" style="height:100%">
+                  <div class="card-header" style=" font-size: 1.5em; background-color: black" >
+                    <ul class="nav nav-tabs md-tabs tabs-2 light-blue darken-3" role="tablist">
+                      <li class="nav-item">
+                        <a class="nav-link active" data-toggle="tab" href="#panel1" role="tab" ><i class="fa fa-user mr-1 fa-lg"></i>
+                          Login
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#panel2" role="tab" ><i class="fa fa-user-plus mr-1 fa-lg"></i>
+                          Register
+                        </a>
+                      </li>
+                    </ul>
                   </div>
-                  <div class="tab-pane fade" id="panel2" role="tabpanel">
-                    <form class="form-signin" name="form" action="sign.php?q=account.php" onSubmit="return validateForm()" method="POST">
-                      <div class="form-label-group">
-                        <label for="inputName">Your Name</label>
-                        <input type="text" id="inputName" name="name" class="form-control" placeholder="Username" required autofocus>
-                      </div>
+                  <div class="card-body" style= " font-size: 1.4em">
+                    <div class="tab-content">
+                      <div class="tab-pane fade show active" id="panel1" role="tabpanel">
+                        <form class="form-signin" action="login.php?q=connect.php" method="POST">
+                          <div class="form-label-group">
+                            <label for="inputEmail">Email address</label>
+                            <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" value="<?php echo $email; ?>" required autofocus>
+                          </div>
 
-                      <div class="form-label-group">
-                        <label for="inputGender">Gender</label>
-                        <select id="inputGender" name="gender" class="form-control">
-                          <option value="Male">Male</option>
-                          <option value="Female">Female</option>
-                        </select>
-                      </div>
+                          <div class="form-label-group">
+                            <label for="inputPassword">Password</label>
+                            <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" value="<?php echo $pass; ?>" required>
+                          </div>
+                          <div class="options text-center text-md-right mt-1">
+                            <p style="color: blue;">Not a member? <a href="#panel2" data-toggle="tab" role="tab" style="color: rgb(171, 194, 219);">Sign Up</a></p>
+                            <p style="color: blue;">Forgot <a href="#" style="color:rgb(169, 190, 214);">Password?</a></p>
+                          </div>
 
-                      <div class="form-label-group">
-                        <label for="inputCollege">Enter your College name</label>
-                        <input type="text" id="inputCollege" name="college" class="form-control" placeholder="College Name" required autofocus>
+                          <div class="custom-control custom-checkbox mb-3">
+                            <input type="checkbox" class="custom-control-input" id="customCheck1" name="chkMe" value="PassSave">
+                            <label class="custom-control-label" for="customCheck1">Remember password</label>
+                          </div>
+                          <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit" >Sign in</button>
+                          <hr class="my-4">
+                        </form>
                       </div>
+                      <div class="tab-pane fade" id="panel2" role="tabpanel">
+                        <form class="form-signin" name="form" action="sign.php?q=account.php" onSubmit="return validateForm()" method="POST">
+                          <div class="form-label-group">
+                            <label for="inputName">Your Name</label>
+                            <input type="text" id="inputName" name="name" class="form-control" placeholder="Username" required autofocus>
+                          </div>
 
-                      <div class="form-label-group">
-                        <label for="inputEmail">Email address</label>
-                        <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-                      </div>
+                          <div class="form-label-group">
+                            <label for="inputGender">Gender</label>
+                            <select id="inputGender" name="gender" class="form-control">
+                              <option value="Male">Male</option>
+                              <option value="Female">Female</option>
+                            </select>
+                          </div>
 
-                      <div class="form-label-group">
-                        <label for="inputNumber">Phone Number</label>
-                        <input type="text" name="mob" id="inputNumber" class="form-control" placeholder="Eneter your phone number here" required autofocus>
-                      </div>
+                          <div class="form-label-group">
+                            <label for="inputCollege">Enter your College name</label>
+                            <input type="text" id="inputCollege" name="college" class="form-control" placeholder="College Name" required autofocus>
+                          </div>
 
-                      <div class="form-label-group">
-                        <label for="inputPass">Make a Password</label>
-                        <input type="password" name="password" id="inputPass" class="form-control" placeholder="Make a password" required autofocus>
-                      </div>
+                          <div class="form-label-group">
+                            <label for="inputEmail">Email address</label>
+                            <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+                          </div>
 
-                      <div class="form-label-group">
-                        <label for="inputPassword">Confirm pass</label>
-                        <input type="password" name="cpassword" id="inputConfirm" class="form-control" placeholder="Confirm your password" required>
+                          <div class="form-label-group">
+                            <label for="inputNumber">Phone Number</label>
+                            <input type="text" name="mob" id="inputNumber" class="form-control" placeholder="Eneter your phone number here" required autofocus>
+                          </div>
+
+                          <div class="form-label-group">
+                            <label for="inputPass">Make a Password</label>
+                            <input type="password" name="password" id="inputPass" class="form-control" placeholder="Make a password" required autofocus>
+                          </div>
+
+                          <div class="form-label-group">
+                            <label for="inputPassword">Confirm pass</label>
+                            <input type="password" name="cpassword" id="inputConfirm" class="form-control" placeholder="Confirm your password" required>
+                          </div>
+                          <?php if(@$_GET['q7'])
+                          { echo'<p style="color:red;font-size:15px;">'.@$_GET['q7'];}
+                          ?>
+                          <div class="options text-center text-md-right mt-1">
+                            <p style="color: blue;">Already Member? <a data-toggle="tab" href="#panel1" role="tab" style="color: rgb(171, 194, 219);">Sign Up</a></p>
+                          </div>
+                          <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign Up</button>
+                          <hr class="my-4">
+                        </form>
                       </div>
-                      <?php if(@$_GET['q7'])
-                      { echo'<p style="color:red;font-size:15px;">'.@$_GET['q7'];}
-                      ?>
-                      <div class="options text-center text-md-right mt-1">
-                        <p style="color: blue;">Already Member? <a data-toggle="tab" href="#panel1" role="tab" style="color: rgb(171, 194, 219);">Sign Up</a></p>
-                      </div>
-                      <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign Up</button>
-                      <hr class="my-4">
-                    </form>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
       <!--Footer start-->
       <div class="row footer">
       <div class="col-md-4 box">
