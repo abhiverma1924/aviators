@@ -60,7 +60,7 @@ var b = document.forms["form"]["cpassword"].value;if (a!=b){alert("Passwords mus
       .bg-image {
         position: absolute;
         /* The image used */
-        background-image: url("../images/background.jpg");
+        background-image: url("./images/background.jpg");
 
         /* Add the blur effect */
         filter: blur(8px);
@@ -107,13 +107,13 @@ var b = document.forms["form"]["cpassword"].value;if (a!=b){alert("Passwords mus
                   <div class="carousel-inner" role="listbox">
                     <!--First slide-->
                     <div class="carousel-item active">
-                        <img class="d-block w-100" src="https://images.unsplash.com/photo-1558008258-3256797b43f3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1489&q=80"
+                        <img class="d-block w-100" src="./images/imageLogin2.jpg"
                         alt="First slide" >
                     </div>
                     <!--/First slide-->
                     <!--Second slide-->
                     <div class="carousel-item">
-                        <img class="d-block w-100"  src="https://meetings.okstate.edu/site-files/images/theater001-b.jpg"
+                        <img class="d-block w-100"  src="./images/imageLogin1.jpg"
                         alt="Second slide">
                     </div>
                     <!--/Second slide-->
@@ -122,8 +122,8 @@ var b = document.forms["form"]["cpassword"].value;if (a!=b){alert("Passwords mus
               </div>
               <div class="col-md-7 mx-auto" style="height:100vh">
                 <div class="card card-signin" style="height:100%">
-                  <div class="card-header" style=" font-size: 1.5em; background-color: black" >
-                    <ul class="nav nav-tabs md-tabs tabs-2 light-blue darken-3" role="tablist">
+                  <div class="card-header" style=" font-size: 1.5em;" >
+                    <ul class="nav nav-tabs md-tabs tabs-2" style="margin-left:20%;" role="tablist">
                       <li class="nav-item">
                         <a class="nav-link active" data-toggle="tab" href="#panel1" role="tab" ><i class="fa fa-user mr-1 fa-lg"></i>
                           Login
