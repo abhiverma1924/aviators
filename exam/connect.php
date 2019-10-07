@@ -85,7 +85,7 @@ var b = document.forms["form"]["cpassword"].value;if (a!=b){alert("Passwords mus
         #imageDiv img {
           padding: 0% 0% 0% 0%;
           width: 90vh;
-          height: 90vh;
+          height: 95vh;
         }
         .carousel-indicators > li {
           border-radius: 100%;
@@ -121,7 +121,7 @@ var b = document.forms["form"]["cpassword"].value;if (a!=b){alert("Passwords mus
                 </div>
               </div>
               <div class="col-md-7 mx-auto" style="height:100vh">
-                <div class="card card-signin" style="height:100%">
+                <div class="card card-signin" style="height:95%">
                   <div class="card-header" style=" font-size: 1.5em;" >
                     <ul class="nav nav-tabs md-tabs tabs-2" style="margin-left:20%;" role="tablist">
                       <li class="nav-item">
@@ -136,7 +136,13 @@ var b = document.forms["form"]["cpassword"].value;if (a!=b){alert("Passwords mus
                       </li>
                     </ul>
                   </div>
-                  <div class="card-body" style= " font-size: 1.4em">
+                  <style>
+                  form {
+                    overflow: auto;
+                    max-height: 70vh;
+                  }
+                  </style>
+                  <div class="card-body" style= " font-size: 1.4em; max-height: 100%">
                     <div class="tab-content">
                       <div class="tab-pane fade show active" id="panel1" role="tabpanel">
                         <form class="form-signin" action="login.php?q=connect.php" method="POST">
