@@ -85,11 +85,40 @@ var b = document.forms["form"]["cpassword"].value;if (a!=b){alert("Passwords mus
         <div class="row">
           <style>
             #imageDiv img {
-              padding: 10% 10% 10% 10%;
+              padding: 0% 0% 0% 0%;
+              width: 100%;
+              height: 90vh;
+            }
+            .carousel-indicators > li {
+              border-radius: 100%;
+              height: 2vh;
+              width: 2vh;
             }
           </style>
-              <div id="imageDiv" class="col-md-8 d-none d-md-block" style= " border-radius: 60px; height: 100vh; width: 100vh ">
-                <img src="../images/imageLogin.jpg" width="90%" height="90%" align="middle" >
+              <div id="imageDiv" class="col-md-8 d-none d-md-block" style= "border-radius: 60px;">
+                <div id="carousel-login" class="carousel slide" data-ride="carousel" style="width:80vh">
+                  <!--Indicators-->
+                  <ol class="carousel-indicators">
+                    <li data-target="#carousel-login" data-slide-to="0" class="active"></li>
+                    <li data-target="#carousel-login" data-slide-to="1" ></li>
+                  </ol>
+                  <!--/.Indicators-->
+                  <!--Slides-->
+                  <div class="carousel-inner" role="listbox">
+                    <!--First slide-->
+                    <div class="carousel-item active">
+                        <img class="d-block w-100" src="https://images.unsplash.com/photo-1558008258-3256797b43f3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1489&q=80"
+                        alt="First slide" >
+                    </div>
+                    <!--/First slide-->
+                    <!--Second slide-->
+                    <div class="carousel-item">
+                        <img class="d-block w-100"  src="https://meetings.okstate.edu/site-files/images/theater001-b.jpg"
+                        alt="Second slide">
+                    </div>
+                    <!--/Second slide-->
+                  </div>
+                </div>
               </div>
           <div class="col-sm-8 col-md-4 mx-auto ">
             <div class="card card-signin my-5">
