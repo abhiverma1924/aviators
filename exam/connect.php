@@ -78,7 +78,7 @@ var b = document.forms["form"]["cpassword"].value;if (a!=b){alert("Passwords mus
       </style>
       <div class="navbar" style=" background-color: black ">
         <div class="nav-brand" style=" color: red">
-          <a href="../index.html"><h1>AVIATOR</h1></a>
+          <a href="../index.html"><img src="../images/logo.jpg" width="140vh" height="80vh" style="margin-left: 80%;"></a>
         </div>
       </div>
       <style>
