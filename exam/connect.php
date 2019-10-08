@@ -107,8 +107,12 @@ var b = document.forms["form"]["cpassword"].value;if (a!=b){alert("Passwords mus
                   <div class="carousel-inner" role="listbox">
                     <!--First slide-->
                     <div class="carousel-item active">
-                        <img class="d-block w-100" src="./images/imageLogin2.jpg"
+                        <img src="./images/imageLogin2.jpg" style="z-index: -1;width:100%;"
                         alt="First slide" >
+                        <img src="./images/logo.jpg" style=" border-radius: 100%; margin-top:-90vh; margin-left:25%; height:40%; width:50% ">
+                        <div style="color: #FFF; margin-top: -40vh; margin-left: 10%; margin-right:10%; height:40vh;">
+                          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus nisl dui, sollicitudin ultrices hendrerit vel, dignissim in arcu. Phasellus bibendum aliquet pellentesque. Curabitur aliquet scelerisque tempor. Pellentesque aliquam elit a metus imperdiet euismod. Sed a metus a felis consectetur consequat. Ut a bibendum elit, vitae mattis velit</p>
+                        </div>
                     </div>
                     <!--/First slide-->
                     <!--Second slide-->
@@ -120,10 +124,19 @@ var b = document.forms["form"]["cpassword"].value;if (a!=b){alert("Passwords mus
                   </div>
                 </div>
               </div>
-              <div class="col-md-7 mx-auto" style="height:100vh">
-                <div class="card card-signin" style="height:95%">
+              <div class="col-md-7 mx-auto" style="height:100vh; width: 100%">
+                <div class="card card-signin" style="height:95%; width:100%; margin-left: -10%">
                   <div class="card-header" style=" font-size: 1.5em;" >
-                    <ul class="nav nav-tabs md-tabs tabs-2" style="margin-left:20%;" role="tablist">
+                    <style>
+                    li .nav-link{
+                      color: grey;
+                    }
+                    li .active {
+                      border-bottom: 3px solid;
+                      color: #259;
+                    }
+                    </style>
+                    <ul class="nav tabs-2" style="margin-left:20%;" role="tablist">
                       <li class="nav-item">
                         <a class="nav-link active" data-toggle="tab" href="#panel1" role="tab" ><i class="fa fa-user mr-1 fa-lg"></i>
                           Login
