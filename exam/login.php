@@ -42,6 +42,7 @@ $_SESSION["email"] = $email;
 header("location:account.php?q=1");
 }
 else {
-	header("location:$ref?w=Wrong Username or Password");
+	echo $email;
+  echo $password;
 }
 ?>
