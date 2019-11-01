@@ -85,7 +85,8 @@ echo '<span class="pull-right top title1" ><span class="log1"><span class="glyph
 <div class="col-md-12">
 
 <!--home start-->
-<?php if(@$_GET['q']==1) {
+<?php
+if(@$_GET['q']==1) {
 
 $result = mysqli_query($con,"SELECT * FROM quiz ORDER BY date DESC") or die('Error');
 echo  '<div class="panel"><div class="table-responsive"><table class="table table-striped title1">
@@ -95,35 +96,34 @@ while($row = mysqli_fetch_array($result)) {
 	$title = $row['title'];
 	$total = $row['total'];
 	$sahi = $row['sahi'];
-    $time = $row['time'];
+  $time = $row['time'];
 	$eid = $row['eid'];
 $q12=mysqli_query($con,"SELECT score FROM history WHERE eid='$eid' AND email='$email'" )or die('Error98');
 $rowcount=mysqli_num_rows($q12);
 if($rowcount == 0){
 	echo '<tr><td>'.$c++.'</td><td>'.$title.'</td><td>'.$total.'</td><td>'.$sahi*$total.'</td><td>'.$time.'&nbsp;min</td>
-	<td><b><a href="account.php?q=quiz&step=2&eid='.$eid.'&n=1&t='.$total.'&tim='.$time.'" class="pull-right btn sub1" style="margin:0px;background:#99cc32"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span>&nbsp;<span class="title1"><b>Start</b></span></a></b></td></tr>';
+	<td><b><a href="account.php?q=quiz&step=2&eid='.$eid.'&n=1&t='.$total.'" class="pull-right btn sub1" style="margin:0px;background:#99cc32"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span>&nbsp;<span class="title1"><b>Start</b></span></a></b></td></tr>';
 }
 else
 {
 echo '<tr style="color:#99cc32"><td>'.$c++.'</td><td>'.$title.'&nbsp;<span title="This quiz is already solve by you" class="glyphicon glyphicon-ok" aria-hidden="true"></span></td><td>'.$total.'</td><td>'.$sahi*$total.'</td><td>'.$time.'&nbsp;min</td>
-	<td><b><a href="update.php?q=quizre&step=25&eid='.$eid.'&n=1&t='.$total.'&tim='.$time.'" class="pull-right btn sub1" style="margin:0px;background:red"><span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>&nbsp;<span class="title1"><b>Restart</b></span></a></b></td></tr>';
+	<td><b><a href="update.php?q=quizre&step=25&eid='.$eid.'&n=1&t='.$total.'" class="pull-right btn sub1" style="margin:0px;background:red"><span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>&nbsp;<span class="title1"><b>Restart</b></span></a></b></td></tr>';
 }
 }
 $c=0;
 echo '</table></div></div>';
-
-}?>
-<span id="countdown" class="timer"></span>
-<script>
-<?php
-$totalq=@$_GET['t'];
-$totalt=@$_GET['tim'];
-if($totalt) {
-  $tim=($totalt*60)/$totalq;
 }
 ?>
-console.log(<?php echo $tim?>);
-var seconds = <?php echo $tim?>;
+<span id="countdown" class="timer"></span>
+<?php
+$eid=@$_GET['eid'];
+$result = mysqli_query($con,"SELECT * FROM quiz WHERE eid='$eid'") or die('Error');
+$value = mysqli_fetch_array($result);
+$time = $value['time'];
+$tim=$time*60;
+?>
+<script>
+var seconds = <?php echo $tim;?>;
     function secondPassed() {
     var minutes = Math.round((seconds - 30)/60);
     var remainingSeconds = seconds % 60;
@@ -146,11 +146,36 @@ var countdownTimer = setInterval('secondPassed()', 1000);
 <!--quiz start-->
 <?php
 if(@$_GET['q']== 'quiz' && @$_GET['step']== 2) {
-$eid=@$_GET['eid'];
 $sn=@$_GET['n'];
 $total=@$_GET['t'];
 $q=mysqli_query($con,"SELECT * FROM questions WHERE eid='$eid' AND sn='$sn' " );
 echo '<div class="panel" style="margin:5%">';
+
+//creating the shortcut to questions
+echo '
+<nav class="navbar navbar-expand-sm navbar-light bg-light">
+<div class="collapse navbar-collapse" id="quizNav">
+  <ul class="nav navbar-nav mr-auto">';
+for ($i=1; $i<=$total; $i++) {
+    if($i == $sn) {
+      echo '<li class="nav-item active" style="border: 1px solid black; color: white; background-color: blue">';
+    }
+    else {
+      echo '<li class="nav-item" style="border: 1px solid black; color: white; background-color: green">';
+    }
+    echo'
+        <a class="nav-link" href="account.php?q=quiz&step=2&eid='.$eid.'&n='.$i.'&t='.$total.'">
+          '.$i.'
+        </a>
+      </li>';
+}
+echo '
+  </ul>
+</div>
+</nav>';
+
+//shortcut Created...
+
 while($row=mysqli_fetch_array($q) )
 {
 $qns=$row['qns'];
@@ -165,12 +190,41 @@ while($row=mysqli_fetch_array($q) )
 {
 $option=$row['option'];
 $optionid=$row['optionid'];
-echo'<input type="radio" name="ans" value="'.$optionid.'">'.$option.'<br /><br />';
+echo'<input type="radio" name="ans" onclick="buttonDisable()" value="'.$optionid.'">'.$option.'<br /><br />';
 }
-echo'<br /><button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span>&nbsp;Submit</button></form></div>';
+?>
+
+
+<!--THIS IS THE CODE FOR OPTION LOCKING -->
+
+
+
+<script>
+function buttonDisable() {
+  document.getElementsByName('ans').forEach(function(item) {
+    item.disabled = true;
+  })
+}
+function buttonEnable() {
+  document.getElementsByName('ans').forEach(function(item) {
+    item.disabled = false;
+  })
+}
+</script>
+
+<!--OPTION LOCKING END -->
+
+<?php
+echo'<br /><button type="submit" class="btn btn-primary">
+<span class="glyphicon glyphicon-lock" aria-hidden="true">
+</span>&nbsp;Submit</button>
+<button type="reset" onclick="buttonEnable()" class="btn btn-secondry">
+Reset Choices
+</button></form></div>';
 header("location:dash.php?q=4&step=2&eid=$id&n=$total");
 }
 //result display
+//and reset will reset option locking
 if(@$_GET['q']== 'result' && @$_GET['eid'])
 {
 $eid=@$_GET['eid'];

@@ -115,6 +115,7 @@ $sn=@$_GET['n'];
 $total=@$_GET['t'];
 $ans=$_POST['ans'];
 $qid=@$_GET['qid'];
+$tim=@$_GET['tim'];
 $q=mysqli_query($con,"SELECT * FROM answer WHERE qid='$qid' " );
 while($row=mysqli_fetch_array($q) )
 {
@@ -142,7 +143,7 @@ $r++;
 $s=$s+$sahi;
 $q=mysqli_query($con,"UPDATE `history` SET `score`=$s,`level`=$sn,`sahi`=$r, date= NOW()  WHERE  email = '$email' AND eid = '$eid'")or die('Error124');
 
-} 
+}
 else
 {
 $q=mysqli_query($con,"SELECT * FROM quiz WHERE eid='$eid' " )or die('Error129');
@@ -168,7 +169,7 @@ $q=mysqli_query($con,"UPDATE `history` SET `score`=$s,`level`=$sn,`wrong`=$w, da
 if($sn != $total)
 {
 $sn++;
-header("location:account.php?q=quiz&step=2&eid=$eid&n=$sn&t=$total")or die('Error152');
+header("location:account.php?q=quiz&step=2&eid=$eid&n=$sn&t=$total&tim=$tim")or die('Error152');//entering the value of time as GET REQUEST for second question
 }
 else if( $_SESSION['key']!='sunny7785068889')
 {
@@ -222,6 +223,3 @@ header("location:account.php?q=quiz&step=2&eid=$eid&n=1&t=$t");
 }
 
 ?>
-
-
-
