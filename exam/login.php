@@ -39,6 +39,8 @@ while($row = mysqli_fetch_array($result)) {
 }
 $_SESSION["name"] = $name;
 $_SESSION["email"] = $email;
+$_SESSION["quizSub"] = array();
+$_SESSION["quizAtm"] = array();
 header("location:account.php?q=1");
 }
 else {

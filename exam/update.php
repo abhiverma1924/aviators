@@ -169,10 +169,12 @@ $q=mysqli_query($con,"UPDATE `history` SET `score`=$s,`level`=$sn,`wrong`=$w, da
 if($sn != $total)
 {
 $sn++;
-header("location:account.php?q=quiz&step=2&eid=$eid&n=$sn&t=$total&tim=$tim")or die('Error152');//entering the value of time as GET REQUEST for second question
+header("location:account.php?q=quiz&step=2&eid=$eid&n=$sn&t=$total&sub=yes")or die('Error152');//entering the value of time as GET REQUEST for second question
 }
 else if( $_SESSION['key']!='sunny7785068889')
 {
+$_SESSION["quizSub"] = array();
+$_SESSION["quizAtm"] = array();
 $q=mysqli_query($con,"SELECT score FROM history WHERE eid='$eid' AND email='$email'" )or die('Error156');
 while($row=mysqli_fetch_array($q) )
 {

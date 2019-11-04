@@ -142,7 +142,6 @@ var countdownTimer = setInterval('secondPassed()', 1000);
 </script>-->
 
 <!--home closed-->
-
 <!--quiz start-->
 <?php
 if(@$_GET['q']== 'quiz' && @$_GET['step']== 2) {
@@ -152,6 +151,19 @@ $q=mysqli_query($con,"SELECT * FROM questions WHERE eid='$eid' AND sn='$sn' " );
 echo '<div class="panel" style="margin:5%">';
 
 //creating the shortcut to questions
+
+if(@$_GET['sub'] == 'yes') {
+  if(!in_array($sn-1, $_SESSION["quizSub"])) {
+    $_SESSION["quizSub"][] = $sn-1;
+  }
+}
+else if(@$_GET['sub'] == 'no') {
+  if(!in_array(@$_GET['prev'], $_SESSION["quizAtm"])) {
+    $_SESSION["quizAtm"][] = @$_GET['prev'];
+  }
+}
+
+
 echo '
 <nav class="navbar navbar-expand-sm navbar-light bg-light">
 <div class="collapse navbar-collapse" id="quizNav">
@@ -161,10 +173,16 @@ for ($i=1; $i<=$total; $i++) {
       echo '<li class="nav-item active" style="border: 1px solid black; color: white; background-color: blue">';
     }
     else {
-      echo '<li class="nav-item" style="border: 1px solid black; color: white; background-color: green">';
+      echo '<li class="nav-item" style="border: 1px solid black; color: white; background-color: red">';
+      if(in_array($i, $_SESSION["quizSub"])) {
+        echo '<li class="nav-item" style="border: 1px solid black; color: white; background-color: green">';
+      }
+      else if(in_array($i, $_SESSION["quizAtm"])) {
+        echo '<li class="nav-item" style="border: 1px solid black; color: white; background-color: violet">';
+      }
     }
     echo'
-        <a class="nav-link" href="account.php?q=quiz&step=2&eid='.$eid.'&n='.$i.'&t='.$total.'">
+        <a class="nav-link" href="account.php?q=quiz&step=2&eid='.$eid.'&n='.$i.'&t='.$total.'&sub=no&prev='.$sn.'">
           '.$i.'
         </a>
       </li>';
@@ -181,6 +199,7 @@ while($row=mysqli_fetch_array($q) )
 $qns=$row['qns'];
 $qid=$row['qid'];
 echo '<b>Question &nbsp;'.$sn.'&nbsp;::<br />'.$qns.'</b><br /><br />';
+
 }
 $q=mysqli_query($con,"SELECT * FROM options WHERE qid='$qid' " );
 echo '<form action="update.php?q=quiz&step=2&eid='.$eid.'&n='.$sn.'&t='.$total.'&qid='.$qid.'" method="POST"  class="form-horizontal">
