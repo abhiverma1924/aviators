@@ -41,6 +41,7 @@ $_SESSION["name"] = $name;
 $_SESSION["email"] = $email;
 $_SESSION["quizSub"] = array();
 $_SESSION["quizAtm"] = array();
+$_SESSION["quizOptions"] = array();
 header("location:account.php?q=1");
 }
 else {

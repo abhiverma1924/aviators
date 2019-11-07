@@ -114,6 +114,7 @@ $eid=@$_GET['eid'];
 $sn=@$_GET['n'];
 $total=@$_GET['t'];
 $ans=$_POST['ans'];
+$_SESSION['quizOptions'][$sn] = $ans;
 $qid=@$_GET['qid'];
 $tim=@$_GET['tim'];
 $q=mysqli_query($con,"SELECT * FROM answer WHERE qid='$qid' " );
@@ -173,8 +174,6 @@ header("location:account.php?q=quiz&step=2&eid=$eid&n=$sn&t=$total&sub=yes")or d
 }
 else if( $_SESSION['key']!='sunny7785068889')
 {
-$_SESSION["quizSub"] = array();
-$_SESSION["quizAtm"] = array();
 $q=mysqli_query($con,"SELECT score FROM history WHERE eid='$eid' AND email='$email'" )or die('Error156');
 while($row=mysqli_fetch_array($q) )
 {

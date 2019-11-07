@@ -71,7 +71,7 @@ echo '<span class="pull-right top title1" ><span class="log1"><span class="glyph
 		<li <?php if(@$_GET['q']==3) echo'class="active"'; ?>><a href="account.php?q=3"><span class="glyphicon glyphicon-stats" aria-hidden="true"></span>&nbsp;Ranking</a></li>
 		<li class="pull-right"> <a href="logout.php?q=account.php"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;&nbsp;&nbsp;&nbsp;Signout</a></li>
 		</ul>
-            <form class="navbar-form navbar-left" role="search">
+            <form class="navbar-form navbar-left" role="search" onSubmit= "return confirm('You Sure Want to quit the quiz????');" >
         <div class="form-group">
           <input type="text" class="form-control" placeholder="Enter tag ">
         </div>
@@ -121,9 +121,12 @@ $result = mysqli_query($con,"SELECT * FROM quiz WHERE eid='$eid'") or die('Error
 $value = mysqli_fetch_array($result);
 $time = $value['time'];
 $tim=$time*60;
+if(!isset($_COOKIE["time"])) {
+  setcookie("time", time() + $tim, time() + ($tim) + 10, "/");
+}
 ?>
 <script>
-var seconds = <?php echo $tim;?>;
+var seconds = <?php echo $_COOKIE["time"]-time(); ?>;
     function secondPassed() {
     var minutes = Math.round((seconds - 30)/60);
     var remainingSeconds = seconds % 60;
@@ -182,7 +185,7 @@ for ($i=1; $i<=$total; $i++) {
       }
     }
     echo'
-        <a class="nav-link" href="account.php?q=quiz&step=2&eid='.$eid.'&n='.$i.'&t='.$total.'&sub=no&prev='.$sn.'">
+        <a class="nav-link quiz" href="account.php?q=quiz&step=2&eid='.$eid.'&n='.$i.'&t='.$total.'&sub=no&prev='.$sn.'">
           '.$i.'
         </a>
       </li>';
@@ -199,44 +202,41 @@ while($row=mysqli_fetch_array($q) )
 $qns=$row['qns'];
 $qid=$row['qid'];
 echo '<b>Question &nbsp;'.$sn.'&nbsp;::<br />'.$qns.'</b><br /><br />';
-
 }
 $q=mysqli_query($con,"SELECT * FROM options WHERE qid='$qid' " );
-echo '<form action="update.php?q=quiz&step=2&eid='.$eid.'&n='.$sn.'&t='.$total.'&qid='.$qid.'" method="POST"  class="form-horizontal">
-<br />';
+
+if($sn != 20) {
+  echo '<form method="post" class="form-horizontal" action="update.php?q=quiz&step=2&eid='.$eid.'&n='.$sn.'&t='.$total.'&qid='.$qid.'" >
+  <br />';
+}
+else {
+  echo '<form method="post" onSubmit= "return confirm(\'You Sure To Final Submit????\');" class="form-horizontal" action="update.php?q=quiz&step=2&eid='.$eid.'&n='.$sn.'&t='.$total.'&qid='.$qid.'" >
+  <br />';
+}
+
 
 while($row=mysqli_fetch_array($q) )
 {
-$option=$row['option'];
-$optionid=$row['optionid'];
-echo'<input type="radio" name="ans" onclick="buttonDisable()" value="'.$optionid.'">'.$option.'<br /><br />';
+  $option=$row['option'];
+  $optionid=$row['optionid'];
+  if(array_key_exists($sn, $_SESSION['quizOptions'])) {
+    if($optionid == $_SESSION['quizOptions'][$sn]) {
+      echo'<input type="radio" name="ans" onclick="buttonDisable()" value="'.$optionid.'" checked>'.$option.' <br /><br />';
+    }
+    else {
+      echo'<input type="radio" name="ans" onclick="buttonDisable()" value="'.$optionid.'" disabled>'.$option.' <br /><br />';
+    }
+  }
+  else {
+    echo'<input type="radio" name="ans" onclick="buttonDisable()" value="'.$optionid.'">'.$option.' <br /><br />';
+  }
 }
-?>
 
 
-<!--THIS IS THE CODE FOR OPTION LOCKING -->
-
-
-
-<script>
-function buttonDisable() {
-  document.getElementsByName('ans').forEach(function(item) {
-    item.disabled = true;
-  })
-}
-function buttonEnable() {
-  document.getElementsByName('ans').forEach(function(item) {
-    item.disabled = false;
-  })
-}
-</script>
-
-<!--OPTION LOCKING END -->
-
-<?php
 echo'<br /><button type="submit" class="btn btn-primary">
 <span class="glyphicon glyphicon-lock" aria-hidden="true">
 </span>&nbsp;Submit</button>
+
 <button type="reset" onclick="buttonEnable()" class="btn btn-secondry">
 Reset Choices
 </button></form></div>';
@@ -272,6 +272,30 @@ echo '</table></div>';
 
 }
 ?>
+
+<!--THIS IS THE CODE FOR OPTION LOCKING -->
+
+
+
+<script>
+function buttonDisable() {
+  document.getElementsByName('ans').forEach(function(item) {
+    if(!item.checked) {
+      item.disabled = true;
+    }
+  })
+}
+function buttonEnable() {
+  document.getElementsByName('ans').forEach(function(item) {
+    item.disabled = false;
+  })
+}
+</script>
+
+<!--OPTION LOCKING END -->
+
+
+
 <!--quiz end-->
 <?php
 //history start
@@ -397,6 +421,31 @@ echo '</table></div></div>';}
 </div><!-- /.modal -->
 <!--footer end-->
 
+<!-- DISABLING ALL LINKS I WHEN IN QUESTIOn PAGE  -->
+
+<?php
+if(@$_GET['q']== 'quiz') {
+  echo '
+  <script>
+    var inputList = Array.prototype.slice.call(document.querySelectorAll("a:not(.quiz)"));
+    inputList.forEach(function(item) {
+      item.setAttribute("onclick", "return confirm(\'You Sure Want to quit the quiz????\');");
+    });
+  </script>
+  ';
+}
+else {
+  $_SESSION["quizSub"] = array();
+  $_SESSION["quizAtm"] = array();
+  $_SESSION["quizOptions"] = array();
+  if(isset($_COOKIE["time"])) {
+    unset($_COOKIE["time"]);
+    setcookie("time", "", time() - 3600, "/");
+  }
+}
+?>
+
+<!-- THATS ALL CODE -->
 
 </body>
 </html>

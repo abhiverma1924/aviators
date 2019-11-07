@@ -30,6 +30,9 @@ if($q3)
 session_start();
 $_SESSION["email"] = $email;
 $_SESSION["name"] = $name;
+$_SESSION["quizSub"] = array();
+$_SESSION["quizAtm"] = array();
+$_SESSION["quizOptions"] = array();
 
 header("location:account.php?q=1");
 }
