@@ -114,7 +114,17 @@ $eid=@$_GET['eid'];
 $sn=@$_GET['n'];
 $total=@$_GET['t'];
 $ans=$_POST['ans'];
-$_SESSION['quizOptions'][$sn] = $ans;
+if($ans) {
+	$_SESSION['quizOptions'][$sn] = $ans;
+	if(!in_array($sn-1, $_SESSION["quizSub"])) {
+    $_SESSION["quizSub"][] = $sn;
+  }
+}
+else {
+	if(!in_array(@$_GET['prev'], $_SESSION["quizAtm"])) {
+    $_SESSION["quizAtm"][] = $sn;
+  }
+}
 $qid=@$_GET['qid'];
 $tim=@$_GET['tim'];
 $q=mysqli_query($con,"SELECT * FROM answer WHERE qid='$qid' " );
@@ -170,7 +180,7 @@ $q=mysqli_query($con,"UPDATE `history` SET `score`=$s,`level`=$sn,`wrong`=$w, da
 if($sn != $total)
 {
 $sn++;
-header("location:account.php?q=quiz&step=2&eid=$eid&n=$sn&t=$total&sub=yes")or die('Error152');//entering the value of time as GET REQUEST for second question
+header("location:account.php?q=quiz&step=2&eid=$eid&n=$sn&t=$total")or die('Error152');//entering the value of time as GET REQUEST for second question
 }
 else if( $_SESSION['key']!='sunny7785068889')
 {

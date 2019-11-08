@@ -9,10 +9,6 @@
  <link  rel="stylesheet" href="css/bootstrap-theme.min.css"/>
  <link rel="stylesheet" href="css/main.css">
  <link  rel="stylesheet" href="css/font.css">
- <script src="js/jquery.js" type="text/javascript"></script>
-
-
-  <script src="js/bootstrap.min.js"  type="text/javascript"></script>
 <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
  <!--alert message-->
 <?php if(@$_GET['w'])
@@ -155,20 +151,19 @@ echo '<div class="panel" style="margin:5%">';
 
 //creating the shortcut to questions
 
-if(@$_GET['sub'] == 'yes') {
-  if(!in_array($sn-1, $_SESSION["quizSub"])) {
-    $_SESSION["quizSub"][] = $sn-1;
-  }
-}
-else if(@$_GET['sub'] == 'no') {
+if(@$_GET['sub'] == 'no') {
   if(!in_array(@$_GET['prev'], $_SESSION["quizAtm"])) {
     $_SESSION["quizAtm"][] = @$_GET['prev'];
   }
 }
 
-
 echo '
 <nav class="navbar navbar-expand-sm navbar-light bg-light">
+<center>
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#quizNav" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    OPEN Questions
+</button>
+</center>
 <div class="collapse navbar-collapse" id="quizNav">
   <ul class="nav navbar-nav mr-auto">';
 for ($i=1; $i<=$total; $i++) {
@@ -181,7 +176,7 @@ for ($i=1; $i<=$total; $i++) {
         echo '<li class="nav-item" style="border: 1px solid black; color: white; background-color: green">';
       }
       else if(in_array($i, $_SESSION["quizAtm"])) {
-        echo '<li class="nav-item" style="border: 1px solid black; color: white; background-color: violet">';
+        echo '<li class="nav-item" style="border: 1px solid black; color: white; background-color: yellow">';
       }
     }
     echo'
@@ -232,15 +227,30 @@ while($row=mysqli_fetch_array($q) )
   }
 }
 
+if($sn == 20) {
+  echo'<br /><button type="buttton" class="btn btn-primary">
+  <span class="glyphicon glyphicon-lock" aria-hidden="true">
+  </span>&nbsp;FINAL Submit</button>';
+  echo '<button type="reset" onclick="buttonEnable()" class="btn btn-secondry">
+  Reset Choices
+  </button>
+  </form></div>
+  ';
+  header("location:dash.php?q=4&step=2&eid=$eid&n=$total");
+}
+else {
+  echo'<br /><button type="submit" class="btn btn-primary">
+  <span class="glyphicon glyphicon-lock" aria-hidden="true">
+  </span>&nbsp;Next</button>';
+  echo '<button type="reset" onclick="buttonEnable()" class="btn btn-secondry">
+  Reset Choices
+  </button></form></div>';
+  header("location:dash.php?q=4&step=2&eid=$eid&n=$total");
+}
 
-echo'<br /><button type="submit" class="btn btn-primary">
-<span class="glyphicon glyphicon-lock" aria-hidden="true">
-</span>&nbsp;Submit</button>
 
-<button type="reset" onclick="buttonEnable()" class="btn btn-secondry">
-Reset Choices
-</button></form></div>';
-header("location:dash.php?q=4&step=2&eid=$id&n=$total");
+
+
 }
 //result display
 //and reset will reset option locking
@@ -446,6 +456,9 @@ else {
 ?>
 
 <!-- THATS ALL CODE -->
+
+<script src="js/jquery.js" type="text/javascript"></script>
+<script src="js/bootstrap.min.js"  type="text/javascript"></script>
 
 </body>
 </html>
