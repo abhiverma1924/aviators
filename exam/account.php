@@ -6,7 +6,6 @@
 
 <title>AVIATION AND COMMUNICATION</title>
 <link  rel="stylesheet" href="css/bootstrap.min.css"/>
- <link  rel="stylesheet" href="css/bootstrap-theme.min.css"/>
  <link rel="stylesheet" href="css/main.css">
  <link  rel="stylesheet" href="css/font.css">
 <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
@@ -158,17 +157,16 @@ if(@$_GET['sub'] == 'no') {
 }
 
 echo '
-<nav class="navbar navbar-expand-sm navbar-light bg-light">
-<center>
-<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#quizNav" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    OPEN Questions
+<nav class="navbar navbar-default">
+<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#quizNav" aria-expanded="false">
+  <span class="sr-only">Toggle navigation</span>
+  OPEN QUSTIONS
 </button>
-</center>
 <div class="collapse navbar-collapse" id="quizNav">
   <ul class="nav navbar-nav mr-auto">';
 for ($i=1; $i<=$total; $i++) {
     if($i == $sn) {
-      echo '<li class="nav-item active" style="border: 1px solid black; color: white; background-color: blue">';
+      echo '<li class="nav-item" style="border: 1px solid black; color: white; background-color: blue">';
     }
     else {
       echo '<li class="nav-item" style="border: 1px solid black; color: white; background-color: red">';
