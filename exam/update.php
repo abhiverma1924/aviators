@@ -117,14 +117,19 @@ $total=@$_GET['t'];
 $ans=$_POST['ans'];
 if($ans) {
 	$_SESSION['quizOptions'][$sn] = $ans;
-	if(!in_array($sn-1, $_SESSION["quizSub"])) {
+	if(!in_array($sn, $_SESSION["quizSub"])) {
     $_SESSION["quizSub"][] = $sn;
+		$_SESSION["quizAtm"][] = $sn;
   }
 }
 else {
-	if(!in_array(@$_GET['prev'], $_SESSION["quizAtm"])) {
-    $_SESSION["quizAtm"][] = $sn;
-  }
+	if(in_array($sn, $_SESSION["quizSub"])) {
+		unset($_SESSION["quizSub"][$key= array_search($sn, $_SESSION["quizSub"])]);
+		unset($_SESSION["quizOptions"][$sn]);
+	}
+	else {
+		$_SESSION["quizAtm"][] = $sn;
+	}
 }
 $qid=@$_GET['qid'];
 $tim=@$_GET['tim'];
@@ -178,10 +183,14 @@ $w++;
 $s=$s-$wrong;
 $q=mysqli_query($con,"UPDATE `history` SET `score`=$s,`level`=$sn,`wrong`=$w, date=NOW() WHERE  email = '$email' AND eid = '$eid'")or die('Error147');
 }
-if($sn != $total)
+if($sn != $total && @$_GET['fin']== 'no')
 {
 $sn++;
-header("location:account.php?q=quiz&step=2&eid=$eid&n=$sn&t=$total")or die('Error152');//entering the value of time as GET REQUEST for second question
+header("location:account.php?q=quiz&step=2&eid=$eid&n=$sn&t=$total")or die('Error152');
+}
+else if($_SESSION['key']!='sunny7785068889' && @$_GET['fin']== 'no') {
+	$sn = 1;
+	header("location:account.php?q=quiz&step=2&eid=$eid&n=$sn&t=$total")or die('Error152');
 }
 else if( $_SESSION['key']!='sunny7785068889')
 {

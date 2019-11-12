@@ -129,7 +129,7 @@ var seconds = <?php echo $_COOKIE["time"]-time(); ?>;
         remainingSeconds = "0" + remainingSeconds;
     }
     document.getElementById('countdown').innerHTML = minutes + ":" +    remainingSeconds;
-    if (seconds == 0) {
+    if (seconds <= 0) {
         clearInterval(countdownTimer);
         document.getElementById('countdown').innerHTML = "Buzz Buzz";
     } else {
@@ -165,17 +165,14 @@ echo '
 <div class="collapse navbar-collapse" id="quizNav">
   <ul class="nav navbar-nav mr-auto">';
 for ($i=1; $i<=$total; $i++) {
-    if($i == $sn) {
-      echo '<li class="nav-item" style="border: 1px solid black; color: white; background-color: blue">';
+    if(in_array($i, $_SESSION["quizSub"])) {
+      echo '<li class="nav-item" style="border: 1px solid black; color: white; background-color: green">';
+    }
+    else if(in_array($i, $_SESSION["quizAtm"])) {
+      echo '<li class="nav-item" style="border: 1px solid black; color: white; background-color: yellow">';
     }
     else {
       echo '<li class="nav-item" style="border: 1px solid black; color: white; background-color: red">';
-      if(in_array($i, $_SESSION["quizSub"])) {
-        echo '<li class="nav-item" style="border: 1px solid black; color: white; background-color: green">';
-      }
-      else if(in_array($i, $_SESSION["quizAtm"])) {
-        echo '<li class="nav-item" style="border: 1px solid black; color: white; background-color: yellow">';
-      }
     }
     echo'
         <a class="nav-link quiz" href="account.php?q=quiz&step=2&eid='.$eid.'&n='.$i.'&t='.$total.'&sub=no&prev='.$sn.'">
@@ -198,15 +195,9 @@ echo '<b>Question &nbsp;'.$sn.'&nbsp;::<br />'.$qns.'</b><br /><br />';
 }
 $q=mysqli_query($con,"SELECT * FROM options WHERE qid='$qid' " );
 
-if($sn != $total) {
-  echo '<form method="post" class="form-horizontal" action="update.php?q=quiz&step=2&eid='.$eid.'&n='.$sn.'&t='.$total.'&qid='.$qid.'" >
-  <br />';
-}
-else {
-  echo '<form method="post" onSubmit= "return confirm(\'You Sure To Final Submit????\');" class="form-horizontal" action="update.php?q=quiz&step=2&eid='.$eid.'&n='.$sn.'&t='.$total.'&qid='.$qid.'" >
-  <br />';
-}
 
+echo '<form id="ansForm" method="post" class="form-horizontal" action="update.php?q=quiz&step=2&fin=no&eid='.$eid.'&n='.$sn.'&t='.$total.'&qid='.$qid.'" >
+<br />';
 
 while($row=mysqli_fetch_array($q) )
 {
@@ -214,40 +205,31 @@ while($row=mysqli_fetch_array($q) )
   $optionid=$row['optionid'];
   if(array_key_exists($sn, $_SESSION['quizOptions'])) {
     if($optionid == $_SESSION['quizOptions'][$sn]) {
-      echo'<input type="radio" name="ans" onclick="buttonDisable()" value="'.$optionid.'" checked>'.$option.' <br /><br />';
+      echo'<input type="radio" name="ans"  value="'.$optionid.'" checked>'.$option.' <br /><br />';
     }
     else {
-      echo'<input type="radio" name="ans" onclick="buttonDisable()" value="'.$optionid.'" disabled>'.$option.' <br /><br />';
+      echo'<input type="radio" name="ans"  value="'.$optionid.'" disabled>'.$option.' <br /><br />';
     }
   }
   else {
-    echo'<input type="radio" name="ans" onclick="buttonDisable()" value="'.$optionid.'">'.$option.' <br /><br />';
+    echo'<input type="radio" name="ans"  value="'.$optionid.'">'.$option.' <br /><br />';
   }
 }
-
-if($sn == 20) {
-  echo'<br /><button type="buttton" class="btn btn-primary">
-  <span class="glyphicon glyphicon-lock" aria-hidden="true">
-  </span>&nbsp;FINAL Submit</button>';
-  echo '<button type="reset" onclick="buttonEnable()" class="btn btn-secondry">
-  Reset Choices
-  </button>
-  </form></div>
-  ';
-  header("location:dash.php?q=4&step=2&eid=$eid&n=$total");
-}
-else {
-  echo'<br /><button type="submit" class="btn btn-primary">
-  <span class="glyphicon glyphicon-lock" aria-hidden="true">
-  </span>&nbsp;Next</button>';
-  echo '<button type="reset" onclick="buttonEnable()" class="btn btn-secondry">
-  Reset Choices
-  </button></form></div>';
-  header("location:dash.php?q=4&step=2&eid=$eid&n=$total");
-}
-
-
-
+echo'<br /><button type="submit" onclick="return subCheckN();" class="btn btn-primary">
+<span class="glyphicon glyphicon-lock" aria-hidden="true">
+</span>&nbsp;Next</button>';
+echo'<br /><button type="button" class="btn btn-primary" onclick="buttonDisable()">
+<span class="glyphicon glyphicon-lock" aria-hidden="true">
+</span>&nbsp;Confirm</button>';
+echo'<br /><button type="submit" onclick= "return subCheckF();" class="btn btn-primary">
+<span class="glyphicon glyphicon-lock" aria-hidden="true">
+</span>&nbsp;FINAL Submit</button>';
+echo '<button type="reset" onclick="buttonEnable()" class="btn btn-secondry">
+Reset Choices
+</button>
+</form></div>
+';
+header("location:dash.php?q=4&step=2&eid=$eid&n=$total");
 
 }
 //result display
@@ -292,16 +274,40 @@ echo '</table>
 
 
 <script>
+var check = false;
 function buttonDisable() {
+  check = true;
   document.getElementsByName('ans').forEach(function(item) {
     if(!item.checked) {
       item.disabled = true;
     }
   })
 }
+function subCheckN() {
+  if(check) {
+    return true;
+  }
+  else {
+    document.getElementsByName('ans').forEach(function(item) {
+      if(item.checked) {
+        item.checked = false;
+      }
+    });
+    return confirm('Please confirm your selection before submiting else selection might not be considered valid and might not be evaluated...\nDo you wish to continue submiting(blank answer)???');
+  }
+}
+function subCheckF() {
+  document.getElementById("ansForm").setAttribute("action",<?php echo'"update.php?q=quiz&step=2&fin=yes&eid='.$eid.'&n='.$sn.'&t='.$total.'&qid='.$qid.'"';?>);
+  return confirm('You Sure To Final Submit????');
+}
 function buttonEnable() {
+  check = false;
   document.getElementsByName('ans').forEach(function(item) {
     item.disabled = false;
+    if(item.checked) {
+      item.checked= false;
+      item.removeAttribute("checked");
+    }
   })
 }
 </script>
