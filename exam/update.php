@@ -50,9 +50,10 @@ $wrong = $_POST['wrong'];
 $time = $_POST['time'];
 $tag = $_POST['tag'];
 $desc = $_POST['desc'];
+$type = $_FILES['file']['type'];
+$file = file_get_contents($_FILES['file']['tmp_name']);
 $id=uniqid();
-$q3=mysqli_query($con,"INSERT INTO quiz VALUES  ('$id','$name' , '$sahi' , '$wrong','$total','$time' ,'$desc','$tag', NOW())");
-
+mysqli_query($con,"INSERT INTO quiz VALUES  ('$id', '$name', '$sahi', '$wrong', '$total', '$time', '$desc', '$tag', NOW(), '".base64_encode($file)."', '$type');"))
 header("location:dash.php?q=4&step=2&eid=$id&n=$total");
 }
 }

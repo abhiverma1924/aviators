@@ -198,7 +198,7 @@ echo '<b>Question &nbsp;'.$sn.'&nbsp;::<br />'.$qns.'</b><br /><br />';
 }
 $q=mysqli_query($con,"SELECT * FROM options WHERE qid='$qid' " );
 
-if($sn != 20) {
+if($sn != $total) {
   echo '<form method="post" class="form-horizontal" action="update.php?q=quiz&step=2&eid='.$eid.'&n='.$sn.'&t='.$total.'&qid='.$qid.'" >
   <br />';
 }
@@ -276,7 +276,13 @@ while($row=mysqli_fetch_array($q) )
 $s=$row['score'];
 echo '<tr style="color:#990000"><td>Overall Score&nbsp;<span class="glyphicon glyphicon-stats" aria-hidden="true"></span></td><td>'.$s.'</td></tr>';
 }
-echo '</table></div>';
+echo '</table>
+<br>
+<a target= "_blank" href= "view.php?id='.$eid.'">
+<button type="button" class="btn btn-success">Check Answers</button>
+</a>
+</div>
+';
 
 }
 ?>
