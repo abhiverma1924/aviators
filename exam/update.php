@@ -53,7 +53,7 @@ $desc = $_POST['desc'];
 $type = $_FILES['file']['type'];
 $file = file_get_contents($_FILES['file']['tmp_name']);
 $id=uniqid();
-mysqli_query($con,"INSERT INTO quiz VALUES  ('$id', '$name', '$sahi', '$wrong', '$total', '$time', '$desc', '$tag', NOW(), '".base64_encode($file)."', '$type');"))
+mysqli_query($con,"INSERT INTO quiz VALUES  ('$id', '$name', '$sahi', '$wrong', '$total', '$time', '$desc', '$tag', NOW(), '".base64_encode($file)."', '$type');");
 header("location:dash.php?q=4&step=2&eid=$id&n=$total");
 }
 }
