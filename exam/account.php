@@ -215,13 +215,13 @@ while($row=mysqli_fetch_array($q) )
     echo'<input type="radio" name="ans"  value="'.$optionid.'">'.$option.' <br /><br />';
   }
 }
-echo'<br /><button type="submit" onclick="return subCheckN();" class="btn btn-primary">
-<span class="glyphicon glyphicon-lock" aria-hidden="true">
+echo'<br /><button type="submit" onclick="return subCheckN();" class="btn btn-info">
+<span class="glyphicon glyphicon-forward" aria-hidden="true">
 </span>&nbsp;Next</button>';
-echo'<br /><button type="button" class="btn btn-primary" onclick="buttonDisable()">
-<span class="glyphicon glyphicon-lock" aria-hidden="true">
+echo'<button type="button" class="btn btn-success" onclick="buttonDisable()">
+<span class="glyphicon glyphicon-ok" aria-hidden="true">
 </span>&nbsp;Confirm</button>';
-echo'<br /><button type="submit" onclick= "return subCheckF();" class="btn btn-primary">
+echo'<button type="submit" onclick= "return subCheckF();" class="btn btn-primary">
 <span class="glyphicon glyphicon-lock" aria-hidden="true">
 </span>&nbsp;FINAL Submit</button>';
 echo '<button type="reset" onclick="buttonEnable()" class="btn btn-secondry">
