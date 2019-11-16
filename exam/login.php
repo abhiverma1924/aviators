@@ -45,7 +45,6 @@ $_SESSION["quizOptions"] = array();
 header("location:account.php?q=1");
 }
 else {
-	echo $email;
-  echo $password;
+	header("location:connect.php");
 }
 ?>
