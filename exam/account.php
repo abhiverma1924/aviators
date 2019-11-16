@@ -147,6 +147,12 @@ $sn=@$_GET['n'];
 $total=@$_GET['t'];
 $q=mysqli_query($con,"SELECT * FROM questions WHERE eid='$eid' AND sn='$sn' " );
 echo '<div class="panel" style="margin:5%">';
+if(mysqli_num_rows(mysqli_query($con,"select * from history where eid= '$eid' and email = '$email'")) == 0) {
+  mysqli_query($con,"INSERT INTO history VALUES('$email','$eid' ,'0','0','0','0',NOW())");
+}
+else if(empty($_SESSION["quizAtm"])) {
+  header("location:update.php?q=quizre&step=25&eid=$eid&n=1&t=$total");
+}
 
 //creating the shortcut to questions
 

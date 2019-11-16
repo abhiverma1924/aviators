@@ -132,7 +132,6 @@ else {
 	}
 }
 $qid=@$_GET['qid'];
-$tim=@$_GET['tim'];
 $q=mysqli_query($con,"SELECT * FROM answer WHERE qid='$qid' " );
 while($row=mysqli_fetch_array($q) )
 {
@@ -144,10 +143,6 @@ $q=mysqli_query($con,"SELECT * FROM quiz WHERE eid='$eid' " );
 while($row=mysqli_fetch_array($q) )
 {
 $sahi=$row['sahi'];
-}
-if($sn == 1)
-{
-$q=mysqli_query($con,"INSERT INTO history VALUES('$email','$eid' ,'0','0','0','0',NOW())")or die('Error');
 }
 $q=mysqli_query($con,"SELECT * FROM history WHERE eid='$eid' AND email='$email' ")or die('Error115');
 
@@ -168,10 +163,6 @@ $q=mysqli_query($con,"SELECT * FROM quiz WHERE eid='$eid' " )or die('Error129');
 while($row=mysqli_fetch_array($q) )
 {
 $wrong=$row['wrong'];
-}
-if($sn == 1)
-{
-$q=mysqli_query($con,"INSERT INTO history VALUES('$email','$eid' ,'0','0','0','0',NOW() )")or die('Error137');
 }
 $q=mysqli_query($con,"SELECT * FROM history WHERE eid='$eid' AND email='$email' " )or die('Error139');
 while($row=mysqli_fetch_array($q) )
