@@ -52,6 +52,11 @@
 	<div class="limiter">
 		<div class="container-login100" style="background-image: url('images/bg-01.jpg');">
 			<div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
+				<button class="btn"><i class="fa fa-home"></i>
+				<a href="../index.html">Home
+					<span class="sr-only">(current)</span>
+				</a>
+				</button>
 				<form class="login100-form validate-form-login" id="logup" method="POST" action="login.php?q=connect.php">
 					<span class="login100-form-title p-b-49">
 						Login
@@ -89,26 +94,6 @@
 						</div>
 					</div>
 
-					<div class="txt1 text-center p-t-54 p-b-20">
-						<span>
-							Or Sign Up Using
-						</span>
-					</div>
-
-					<div class="flex-c-m">
-						<a href="#" class="login100-social-item bg1">
-							<i class="fa fa-facebook"></i>
-						</a>
-
-						<a href="#" class="login100-social-item bg2">
-							<i class="fa fa-twitter"></i>
-						</a>
-
-						<a href="#" class="login100-social-item bg3">
-							<i class="fa fa-google"></i>
-						</a>
-					</div>
-
 					<div class="flex-col-c p-t-40">
 						<span class="txt1 p-b-17">
 							Or Sign Up Using
@@ -119,6 +104,7 @@
 						</a>
 					</div>
 				</form>
+
 				<form class="login100-form validate-form-signup" id="signup" method="POST" action="sign.php?q=account.php" >
 					<span class="login100-form-title p-b-20">
 						SignUp
@@ -191,7 +177,40 @@
 			</div>
 		</div>
 	</div>
+	<div><a href="#" data-toggle="modal" data-target="#login">Admin Login</a></div>
 
+
+		<!--Modal for admin login-->
+			 <div class="modal fade" id="login">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+		        <h4 class="modal-title"><span style="color:orange;font-family:'typo' ">LOGIN</span></h4>
+		      </div>
+		      <div class="modal-body title1">
+		<div class="row">
+		<div class="col-md-3"></div>
+		<div class="col-md-6">
+		<form role="form" method="post" action="admin.php?q=index.php">
+		<div class="form-group">
+		<input type="text" name="uname" maxlength="20"  placeholder="Admin user id" class="form-control"/>
+		</div>
+		<div class="form-group">
+		<input type="password" name="password" maxlength="15" placeholder="Password" class="form-control"/>
+		</div>
+		<div class="form-group" align="center">
+		<input type="submit" name="login" value="Login" class="btn btn-primary" />
+		</div>
+		</form>
+		</div><div class="col-md-3"></div></div>
+		      </div>
+		      <!--<div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		      </div>-->
+		    </div><!-- /.modal-content -->
+		  </div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
 
 	<div id="dropDownSelect1"></div>
 
